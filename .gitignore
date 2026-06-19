@@ -2,6 +2,7 @@
 .idea/
 .vscode/
 .settings
+.factorypath
 .project
 .classpath
 .eclipse/
