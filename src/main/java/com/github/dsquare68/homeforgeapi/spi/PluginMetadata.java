@@ -6,9 +6,11 @@ package com.github.dsquare68.homeforgeapi.spi;
  * <p>HUB uses this to:
  * <ul>
  *   <li>Register the plugin in the database</li>
- *   <li>Add a sidebar entry (icon + label pointing to {@code path})</li>
+ *   <li>Add a sidebar entry (label pointing to {@code path})</li>
  *   <li>Create the plugin's dedicated PostgreSQL schema ({@code schema})</li>
  * </ul>
+ *
+ * <p>Visual icon is not part of metadata — override {@link HubPlugin#getIcon()} instead.
  *
  * @param id          unique snake_case identifier, e.g. {@code gym_tracker}
  * @param name        human-readable display name, e.g. {@code Gym Tracker}
@@ -18,7 +20,6 @@ package com.github.dsquare68.homeforgeapi.spi;
  *                    {@code https://hub.local/gym}
  * @param schema      PostgreSQL schema name for plugin-owned tables,
  *                    e.g. {@code gym_schema}
- * @param icon        Vaadin Lumo icon name or {@code null} for default
  */
 public record PluginMetadata(
         String id,
@@ -26,15 +27,11 @@ public record PluginMetadata(
         String version,
         String description,
         String path,
-        String schema,
-        String icon
+        String schema
 ) {
-    /**
-     * Convenience factory – uses {@code null} icon (HUB will render a puzzle-piece default).
-     */
     public static PluginMetadata of(
             String id, String name, String version,
             String description, String path, String schema) {
-        return new PluginMetadata(id, name, version, description, path, schema, null);
+        return new PluginMetadata(id, name, version, description, path, schema);
     }
 }

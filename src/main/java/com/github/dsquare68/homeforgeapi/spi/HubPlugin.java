@@ -1,6 +1,5 @@
 package com.github.dsquare68.homeforgeapi.spi;
 
-
 import org.pf4j.ExtensionPoint;
 
 /**
@@ -59,5 +58,16 @@ public interface HubPlugin extends ExtensionPoint {
      */
     default void onUninstall() {
         // optional – override to perform cleanup
+    }
+
+    /**
+     * Returns the raw bytes of the plugin's icon image (PNG, SVG, …),
+     * or {@code null} to let HUB render a default placeholder.
+     *
+     * <p>HUB will wrap the bytes in a {@code StreamResource} and construct
+     * a Vaadin {@code Image} on its side — this method stays Vaadin-free.
+     */
+    default byte[] getIconBytes() {
+        return null;
     }
 }
